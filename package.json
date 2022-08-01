@@ -13,11 +13,21 @@
   },
   "keywords": [
     "responsive",
-    "props",
+    "responsive props",
     "prop",
+    "properties",
     "manipulation",
-    "prop",
-    "x"
+    "styled-components",
+    "styled components",
+    "css",
+    "server side rendering",
+    "SSR",
+    "prop-x",
+    "breakpoint"
+  ],
+  "files": [
+    "dist",
+    "README.md"
   ],
   "author": "Jeremy Carpenter",
   "license": "Apache-2.0",

@@ -1,0 +1,38 @@
+{
+  "name": "prop-x",
+  "version": "1.0.0",
+  "description": "A library for responsive props and prop manipulation.",
+  "main": "lib/core.js",
+  "scripts": {
+    "build": "babel src -d lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carpenjk/prop-x.git"
+  },
+  "keywords": [
+    "responsive",
+    "props",
+    "prop",
+    "manipulation",
+    "prop",
+    "x"
+  ],
+  "author": "Jeremy Carpenter",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/carpenjk/prop-x/issues"
+  },
+  "homepage": "https://github.com/carpenjk/prop-x#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.18.9",
+    "@babel/core": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
+    "eslint": "^8.20.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0"
+  }
+}

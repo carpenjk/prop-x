@@ -19,7 +19,7 @@ prop-x is a library to facilitate passing multiple values for each react propert
 ### Install
 
 ```js
-    npm install carpenjk/prop-x
+    npm i @carpenjk/prop-x
 ```
 
 ### Usage

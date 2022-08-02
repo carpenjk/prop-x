@@ -1,5 +1,5 @@
 {
-  "name": "prop-x",
+  "name": "@carpenjk/prop-x",
   "version": "1.0.0",
   "description": "A library for responsive props and prop manipulation.",
   "main": "lib/core.js",
@@ -26,8 +26,11 @@
     "breakpoint"
   ],
   "files": [
-    "dist",
-    "README.md"
+    "lib",
+    "README.md",
+    "useBreakpoints.js",
+    "useWindowSizejs",
+    "css.js"
   ],
   "author": "Jeremy Carpenter",
   "license": "Apache-2.0",
@@ -44,5 +47,8 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-promise": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

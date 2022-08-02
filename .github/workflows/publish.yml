@@ -42,4 +42,4 @@ jobs:
       with:
         node-versions: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm semantic-release
+    - run: npm run semantic-release

@@ -30,7 +30,7 @@
     "lib",
     "README.md",
     "useBreakpoints.js",
-    "useWindowSizejs",
+    "useWindowSize.js",
     "css.js"
   ],
   "author": "Jeremy Carpenter",

@@ -18,11 +18,13 @@ export const breakpoint = (br) => (...args) => (props) => {
     // [1, 2] beginning and ending breakpoints by numerical order
     let medias = ''
     let isInRange = false
+    let currBRIndex = 0
     for (const [key, value] of Object.entries(breakpoints)) {
       if (key === br[0] || key === br[0].toString()) isInRange = true
       if (isInRange) {
-        medias += createMediaQuery(_getUnitValue(value), key)
+        medias += createMediaQuery(_getUnitValue(value), currBRIndex)
       }
+      currBRIndex += 1
       if (key === br[1] || key === br[1].toString()) break // end of br range
     }
     return medias

@@ -22,7 +22,6 @@ export const useBreakpoints = (theme) => {
 
     const getNearsestUp = (prev, br) => {
       const brPx = getPxValue(br)
-      const upper = ''
       if (!prev) {
         return brPx
       }
@@ -75,7 +74,14 @@ export const useBreakpoints = (theme) => {
   }
 
   const getIndexOfLower = () => {
-    return getBreakpointPixels().indexOf(getLower())
+    const breakpoints = getBreakpointPixels()
+    if (breakpoints.length === 1) {
+      return 0
+    } else if (Array.isArray(breakpoints)) {
+      return breakpoints.indexOf(getLower())
+    } else { // must be obj
+      return Object.keys(breakpoints).filter((br) => breakpoints[br] === getLower())
+    }
   }
 
   const [breakpoints, setBreakpoints] = useState({

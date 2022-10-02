@@ -64,22 +64,22 @@ export const useBreakpoints = (theme) => {
 
   const getRatio = () => (1 - (getUpper() - getLower()) / getUpper())
 
-  const getPxValues = () => {
+  const getBreakpointPixels = () => {
     if (typeof theme.breakpoints !== 'object') {
-      return getPxValue(theme.breakpoints)
+      return [getPxValue(theme.breakpoints)]
     } else if (Array.isArray(theme.breakpoints)) {
       return theme.breakpoints.map((br) => Number(getPxValue(br)))
     } else { // must be an object
-      return Object.keys(theme.breakpoints).map((br) => Number(getPxValue(theme.breakpoints[br])))
+      return Object.keys(theme.breakpoints).reduce((obj, br) => ({ ...obj, [br]: Number(getPxValue(theme.breakpoints[br])) }))
     }
   }
 
   const getIndexOfLower = () => {
-    return getPxValues().indexOf(getLower())
+    return getBreakpointPixels().indexOf(getLower())
   }
 
   const [breakpoints, setBreakpoints] = useState({
-    br: getPxValues(),
+    br: getBreakpointPixels(),
     upper: getUpper(),
     lower: getLower(),
     indexOfLower: getIndexOfLower(),
@@ -89,7 +89,8 @@ export const useBreakpoints = (theme) => {
 
   useEffect(() => {
     setBreakpoints({
-      br: getPxValues(),
+      br: getBreakpointPixels(),
+      breakpoints: theme.breakpoints,
       upper: getUpper(),
       lower: getLower(),
       indexOfLower: getIndexOfLower(),

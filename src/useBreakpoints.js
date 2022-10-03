@@ -69,7 +69,7 @@ export const useBreakpoints = (theme) => {
     } else if (Array.isArray(theme.breakpoints)) {
       return theme.breakpoints.map((br) => Number(getPxValue(br)))
     } else { // must be an object
-      return Object.keys(theme.breakpoints).reduce((obj, br) => ({ ...obj, [br]: Number(getPxValue(theme.breakpoints[br])) }))
+      return Object.keys(theme.breakpoints).reduce((obj, br) => ({ ...obj, [br]: Number(getPxValue(theme.breakpoints[br])) }), {})
     }
   }
 

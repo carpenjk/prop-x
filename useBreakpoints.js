@@ -1,1 +1,1 @@
-module.exports = require('./lib/useBreakpoints')
+module.exports = require('./lib/useBreakpoints/useBreakpoints')

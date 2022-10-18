@@ -42,7 +42,7 @@ export const getUpper = (breakpoints, windowSize) => {
     const diff = br - windowSize.width
     return (diff > 0 && diff < prev - windowSize.width ? br : prev)
   }
-  return toArray()
+  return toArray(breakpoints)
     .reverse()
     .reduce(getNearestUp)
 }
@@ -58,7 +58,7 @@ export const getLower = (breakpoints, windowSize) => {
     const diff = windowSize.width - br
     return (diff > 0 && diff < windowSize.width - prev ? br : prev)
   }
-  return toArray().reduce(getNearestLow)
+  return toArray(breakpoints).reduce(getNearestLow)
 }
 
 export const getRatio = (breakpoints, windowSize) => (

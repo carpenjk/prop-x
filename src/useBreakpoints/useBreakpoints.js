@@ -13,7 +13,7 @@ export const useBreakpoints = (brValues) => {
     indexOfLower: getIndexOfLower(brValues),
     ratio: () => getRatio(brValues, windowSize), // in consideration for future intellegent br functionality
     current: { width: windowSize.width, height: windowSize.height },
-    toArray: toArray(brValues)
+    toArray: () => toArray(brValues)
   })
 
   useEffect(() => {

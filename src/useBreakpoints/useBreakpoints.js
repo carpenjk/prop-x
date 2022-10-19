@@ -8,11 +8,11 @@ export const useBreakpoints = (brValues) => {
   const [breakpoints, setBreakpoints] = useState({
     br: getBreakpointPixels(brValues),
     breakpoints: brValues,
-    upper: getUpper(brValues),
-    lower: getLower(brValues),
-    indexOfLower: getIndexOfLower(brValues),
+    upper: getUpper(brValues, windowSize),
+    lower: getLower(brValues, windowSize),
+    indexOfLower: getIndexOfLower(brValues, windowSize),
     ratio: () => getRatio(brValues, windowSize), // in consideration for future intellegent br functionality
-    current: { width: windowSize.width, height: windowSize.height },
+    current: windowSize,
     toArray: () => toArray(brValues)
   })
 
@@ -20,9 +20,9 @@ export const useBreakpoints = (brValues) => {
     setBreakpoints({
       br: getBreakpointPixels(brValues),
       breakpoints: brValues,
-      upper: getUpper(brValues),
-      lower: getLower(brValues),
-      indexOfLower: getIndexOfLower(brValues),
+      upper: getUpper(brValues, windowSize),
+      lower: getLower(brValues, windowSize),
+      indexOfLower: getIndexOfLower(brValues, windowSize),
       ratio: getRatio(brValues, windowSize), // in consideration for future intellegent br functionality
       current: windowSize,
       toArray: () => toArray(brValues)

@@ -67,13 +67,13 @@ export const getRatio = (breakpoints, windowSize) => (
 )
 
 // returns the array index or object key of nearest lower breakpoint
-export const getIndexOfLower = (breakpoints) => {
+export const getIndexOfLower = (breakpoints, windowSize) => {
   const brPixels = getBreakpointPixels(breakpoints)
   if (brPixels.length === 1) {
     return 0
   } else if (Array.isArray(brPixels)) {
-    return brPixels.indexOf(getLower(breakpoints))
+    return brPixels.indexOf(getLower(breakpoints, windowSize))
   } else { // must be obj
-    return Object.keys(brPixels).filter((br) => brPixels[br] === getLower())
+    return Object.keys(brPixels).filter((br) => brPixels[br] === getLower(breakpoints, windowSize))[0]
   }
 }

@@ -241,7 +241,7 @@ const GridContainer = ({ images, children, ...props }) => {
 ## core
 ### getPropIndex
 ```js
-  const i = getIndexedPropValue(<propValues>, <index>);
+  const value = getIndexedPropValue(<propValues>, <index>);
 ```
 
 This function returns the applicable index to use for the provided property and index

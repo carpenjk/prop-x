@@ -17,14 +17,14 @@ prop-x is a library to facilitate passing multiple values for each react propert
 | [parseAndCalc](#parseAndCalc)        	| @carpenjk/prop-x                	| Utility for calculations on size props                                   	|
 | [getPropIndex](#getPropIndex)        	| @carpenjk/prop-x                	| Gets usable index for a given prop                                       	|
 | [getIndexedPropValue](#getPropIndex) 	| @carpenjk/prop-x                	| Gets prop value for a given index                                        	|
-| inverseProp         	| @carpenjk/prop-x                	| returns array of inversed boolean values                                 	|
-| unwindProps         	| @carpenjk/prop-x                	| transforms prop arrays into an array of object key pair values           	|
-| windProps           	| @carpenjk/prop-x                	| transforms array of object key pair values into an object of prop arrays 	|
-| getProp             	| @carpenjk/prop-x/css            	| retrieves a prop value for appropriate breakpoint in css in js solutions 	|
-| breakpoint          	| @carpenjk/prop-x/css            	| creates media query and tells getProp which breakpoint to use            	|
-| condition           	| @carpenjk/prop-x/css            	| conditional css for css in js solutions                                  	|
-| useBreakpoints      	| @carpenjk/prop-x/useBreakpoints 	| hook provides breakpoint and window size state                           	|
-| useWindowSize       	| @carpenjk/prop-x/useWindowSize  	| hook provides window size state                                          	|
+| [inverseProp](#inverseProp)         	| @carpenjk/prop-x                	| returns array of inversed boolean values                                 	|
+| [unwindProps](#unwindProps)         	| @carpenjk/prop-x                	| transforms prop arrays into an array of object key pair values           	|
+| [windProps](#windProps)           	| @carpenjk/prop-x                	| transforms array of object key pair values into an object of prop arrays 	|
+| [getProp](#getProp)             	| @carpenjk/prop-x/css            	| retrieves a prop value for appropriate breakpoint in css in js solutions 	|
+| [breakpoint](#breakpoint)          	| @carpenjk/prop-x/css            	| creates media query and tells getProp which breakpoint to use            	|
+| [condition](#condition)           	| @carpenjk/prop-x/css            	| conditional css for css in js solutions                                  	|
+| [useBreakpoints](#useBreakpoints)      	| @carpenjk/prop-x/useBreakpoints 	| hook provides breakpoint and window size state                           	|
+| [useWindowSize](#useWindowSize)       	| @carpenjk/prop-x/useWindowSize  	| hook provides window size state                                          	|
 
 
 ## License

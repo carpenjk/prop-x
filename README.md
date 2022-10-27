@@ -9,6 +9,24 @@ prop-x is a library to facilitate passing multiple values for each react propert
 - **CSS**  Functions for usage with styled-components that facilitate responsive styles within the styled components css.  This is especially helpful for static site generation and server side rendering as now responsive properties can generate responsive css with no reliance on javascript's window object which is unavailable on the server.
 - **Hooks** 2 hooks are available that can be useful with client side only code. These hooks are useBreakpoints and useWindowSize.
 
+## api
+
+| function            	| path                            	| description                                                              	|
+|---------------------	|---------------------------------	|--------------------------------------------------------------------------	|
+| parseSizeUnits      	| @carpenjk/prop-x                	| Utility for calculations on size props                                   	|
+| parseAndCalc        	| @carpenjk/prop-x                	| Utility for calculations on size props                                   	|
+| getPropIndex        	| @carpenjk/prop-x                	| Gets usable index for a given prop                                       	|
+| getIndexedPropValue 	| @carpenjk/prop-x                	| Gets prop value for a given index                                        	|
+| inverseProp         	| @carpenjk/prop-x                	| returns array of inversed boolean values                                 	|
+| unwindProps         	| @carpenjk/prop-x                	| transforms prop arrays into an array of object key pair values           	|
+| windProps           	| @carpenjk/prop-x                	| transforms array of object key pair values into an object of prop arrays 	|
+| getProp             	| @carpenjk/prop-x/css            	| retrieves a prop value for appropriate breakpoint in css in js solutions 	|
+| breakpoint          	| @carpenjk/prop-x/css            	| creates media query and tells getProp which breakpoint to use            	|
+| condition           	| @carpenjk/prop-x/css            	| conditional css for css in js solutions                                  	|
+| useBreakpoints      	| @carpenjk/prop-x/useBreakpoints 	| hook provides breakpoint and window size state                           	|
+| useWindowSize       	| @carpenjk/prop-x/useWindowSize  	| hook provides window size state                                          	|
+
+
 ## License
 
 [Apache License 2.0](./LICENSE)

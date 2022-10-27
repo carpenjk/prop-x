@@ -13,10 +13,10 @@ prop-x is a library to facilitate passing multiple values for each react propert
 
 | function            	| path                            	| description                                                              	|
 |---------------------	|---------------------------------	|--------------------------------------------------------------------------	|
-| [parseSizeUnits](###parseSizeUnits)      	| @carpenjk/prop-x                	| Utility for calculations on size props                                   	|
-| [parseAndCalc](###parseAndCalc)        	| @carpenjk/prop-x                	| Utility for calculations on size props                                   	|
-| [getPropIndex](###getPropIndex)        	| @carpenjk/prop-x                	| Gets usable index for a given prop                                       	|
-| [getIndexedPropValue](###getPropIndex) 	| @carpenjk/prop-x                	| Gets prop value for a given index                                        	|
+| [parseSizeUnits](#parseSizeUnits)      	| @carpenjk/prop-x                	| Utility for calculations on size props                                   	|
+| [parseAndCalc](#parseAndCalc)        	| @carpenjk/prop-x                	| Utility for calculations on size props                                   	|
+| [getPropIndex](#getPropIndex)        	| @carpenjk/prop-x                	| Gets usable index for a given prop                                       	|
+| [getIndexedPropValue](#getPropIndex) 	| @carpenjk/prop-x                	| Gets prop value for a given index                                        	|
 | inverseProp         	| @carpenjk/prop-x                	| returns array of inversed boolean values                                 	|
 | unwindProps         	| @carpenjk/prop-x                	| transforms prop arrays into an array of object key pair values           	|
 | windProps           	| @carpenjk/prop-x                	| transforms array of object key pair values into an object of prop arrays 	|

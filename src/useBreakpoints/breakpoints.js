@@ -56,7 +56,7 @@ export const getLower = (breakpoints, windowSize) => {
 
   const getNearestLow = (prev, br) => {
     const diff = windowSize.width - br
-    return (diff > 0 && diff < windowSize.width - prev ? br : prev)
+    return (diff >= 0 && diff < windowSize.width - prev ? br : prev)
   }
   return toArray(breakpoints).reduce(getNearestLow)
 }

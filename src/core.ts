@@ -1,30 +1,30 @@
-// takes a css size string and returns an object containing
-// {
-//  whole: <original string> ,
-//  value: <numerical value> ,
-//  unit: <css size unit>,
-// }
-export const parseSizeUnits = (valUnits) => {
-  function parseSizeUnit (valUnit) {
-    if (!valUnit) return undefined
-    if (!valUnit.match) {
-      const numberValue = Number(valUnit)
-      if (!Number.isNaN(numberValue)) {
-        return { value: numberValue, whole: valUnit }
-      } else {
-        return { whole: valUnits }
-      }
+import { IndexKey } from "./types/functionTypes"
+
+type SizeValue = number | void
+type SizeWhole = string
+type SizeUnit = string | void
+interface SizeUnitsObj {
+  whole: SizeWhole, //  whole: <original string> ,
+  value: SizeValue, //  value: <numerical value> ,
+  unit: SizeUnit //  unit: <css size unit>,
+}
+type ValUnits = string | string[] | number | number[]
+
+export const parseSizeUnits = (valUnits: ValUnits): SizeUnitsObj | SizeUnitsObj[] => {
+  function parseSizeUnit(valUnit: string | number): SizeUnitsObj {
+    if (typeof valUnit === 'number') {
+      return { value: valUnit as number, whole: valUnit.toString(), unit: undefined }
     }
-    const exp = /^([+-]?(?:\d+|\d*\.\d+))([a-z]*|%)$/
-    let matches = []
-    matches = valUnit.match(exp)
-    if (!matches) return { whole: valUnits, value: undefined, unit: undefined }
+    const exp: RegExp = /^([+-]?(?:\d+|\d*\.\d+))([a-z]*|%)$/
+    let matches: RegExpMatchArray | null = valUnit.match(exp)
+    if (!matches) return { whole: valUnit as string, value: undefined, unit: undefined }
     return { whole: matches[0], value: matches[1] ? Number(matches[1]) : undefined, unit: matches[2] }
   }
   if (!Array.isArray(valUnits)) {
     return parseSizeUnit(valUnits)
   }
-  return valUnits.map((val) => parseSizeUnit(val))
+  const resultAry: SizeUnitsObj[] = valUnits.map((val) => parseSizeUnit(val))
+  return resultAry
 }
 
 // parses variables and passes to provided callback function
@@ -32,31 +32,33 @@ export const parseSizeUnits = (valUnits) => {
 // ex...  parseAndCalc([height, img.rowSpan], ([_height, rSpan]) =>
 //        _height && rSpan ? _height * rSpan : undefined
 // ),
-export function parseAndCalc (vars, fn) {
-  const parsedVars = [...parseSizeUnits(vars)]
-  const varValues = parsedVars.map((v) => v && v.value ? v.value : undefined)
-  const valWithUnit = parsedVars.find(({ unit }) => unit)
-  const u = valWithUnit && parsedVars.find(({ unit }) => unit).unit ? valWithUnit.unit : ''
+
+export function parseAndCalc(vars: ValUnits, fn: (vals: SizeValue | SizeValue[]) => any): string {
+  const parsed: SizeUnitsObj | SizeUnitsObj[] = parseSizeUnits(vars);
+  const parsedArray: SizeUnitsObj[] = Array.isArray(parsed) ? parsed : [parsed]
+  const varValues: SizeValue[] = parsedArray.map((v) => v && v.value ? v.value : undefined)
+  const valWithUnit: SizeUnitsObj | void = parsedArray.find(({ unit }) => unit)
+  const u = valWithUnit?.unit ?? ''
   return `${fn(varValues)}${u}`
 }
 
 // returns the applicable index to use as a reference for the provided property and index
 // returns the lesser of provided index and last index in the prop array
 // returns undefined if prop is undefined or not an array
-export const getPropIndex = (vals, i) => {
-  const _i = i || 0
+export const getPropIndex = (vals: any, i: IndexKey | void): void | IndexKey => {
+  const _i: IndexKey = i || 0
   if (!vals || !Array.isArray(vals)) return undefined
   return vals[_i] !== undefined ? _i : vals.length - 1
 }
 
 // returns property value based on provided property and index
-export const getIndexedPropValue = (vals, i) => {
-  const index = getPropIndex(vals, i)
+export const getIndexedPropValue = <Val>(vals: Val | Val[], i: IndexKey): Val | Val[] => {
+  const index: IndexKey | void = getPropIndex(vals, i)
   return index !== undefined ? vals[index] : vals
 }
 
 // toggle boolean values in prop or prop array
-export const inverseProp = (prop) => {
+export const inverseProp = (prop: boolean | boolean[]): boolean | boolean[] => {
   if (!Array.isArray(prop)) {
     return !prop
   } else {
@@ -91,14 +93,23 @@ export const inverseProp = (prop) => {
 // reinfuses the default value instead.
 // @params defaults ex. 1 {left: ['8px', '0']}  || ex. 2 {left: '8px'}
 
-export const windProps = (props, config) => {
-  const { defaultValues, options } = config || {}
-  const { useNoValue = true, noValue = '' } = options || {}
+interface WindingOptions {
+  useNoValue?: boolean,
+  noValue?: string | number | boolean | null | undefined
+}
+interface WindingConfig {
+  defaultValues?: any,
+  options?: WindingOptions
+}
+
+export const windProps = (props: object[], config: WindingConfig): object => {
+  const { defaultValues, options }: WindingConfig = config || {}
+  const { useNoValue = true, noValue = '' }: WindingOptions = options || {}
   if (!Array.isArray(props)) {
     return props
   }
-  function createSuperSet (propAry) {
-    const superSetObj = {}
+  function createSuperSet(propAry: object[]): object {
+    const superSetObj: object = {}
     // iterate through each key pair property object
     propAry.forEach((obj) => {
       // iterate through key pairs of current prop object
@@ -110,8 +121,8 @@ export const windProps = (props, config) => {
     return superSetObj
   }
 
-  const wound = createSuperSet(props)
-  const resultLength = props.length
+  const wound: object = createSuperSet(props)
+  const resultLength: number = props.length
   for (let i = 0; i < resultLength; i += 1) {
     Object.keys(wound).forEach((key) => {
       // if key exists in current propArry obj, push value, else push default
@@ -142,11 +153,11 @@ export const windProps = (props, config) => {
 // @option useNoValue: true || false (default)
 // useNoValue overwrites carryforward in the event of no default value
 // @option noValue: any value || undefined (default)
-export const unwindProps = (props, config) => {
-  const { defaultValues, options } = config || {}
-  const { noValue, useNoValue = false } = options || {}
+export const unwindProps = (props: object, config: WindingConfig): object[] => {
+  const { defaultValues, options }: WindingConfig = config || {}
+  const { noValue, useNoValue = false }: WindingOptions = options || {}
   // first iteration return value
-  function getCurrValue (k, i) {
+  function getCurrValue(k: IndexKey, i: number): any {
     const values = props[k]
     // handle undefined properties
     if (!values) {
@@ -169,7 +180,7 @@ export const unwindProps = (props, config) => {
     return { [k]: values[i] }
   }
 
-  const unwound = []
+  const unwound: object[] = []
   const keys = Object.keys(props)
   const resultLength = Math.max(...keys.map((k) => {
     const values = props[k]
@@ -177,7 +188,7 @@ export const unwindProps = (props, config) => {
   }))
 
   for (let i = 0; i < resultLength; i += 1) {
-    const propObj = keys.reduce((obj, p) => {
+    const propObj: object = keys.reduce((obj, p) => {
       // use current value if exist in prop set
       const currVal = getCurrValue(p, i)
       if (currVal !== undefined) {

@@ -1,8 +1,13 @@
-import { IndexKey, BreakpointProps } from "./types/functionTypes"
+import { BreakpointIndex, BreakpointProps } from "../types/propTypes"
 
-export function _getVal(v: any, props: BreakpointProps, br: IndexKey) {
+export function deriveIndex(br: BreakpointIndex | undefined): number {
+  return br === undefined ? 0 : Number(br)
+}
+
+export function _getVal(v: any, props: BreakpointProps, br: BreakpointIndex) {
+  const derivedBr = deriveIndex(br);
   const values = typeof v === 'function' ? v(props, br) : v
-  if (Array.isArray(values)) return values[br]
+  if (Array.isArray(values)) return values[derivedBr]
   return values
 };
 

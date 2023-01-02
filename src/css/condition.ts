@@ -1,13 +1,13 @@
 import { _getVal } from '../internal'
-import { BreakpointProps, IndexKey } from '../types/functionTypes'
+import { BreakpointProps, BreakpointIndex } from '../../types/propTypes'
 import { getProp } from './getProp'
-import { CSSTemplateArgs, NestedBooleanFunction, NestedCSSFunction, SecondOrderFunction, TemplateFn } from '../types/PropTypes'
+import { CSSTemplateArgs, NestedBooleanFunction, NestedCSSFunction, SecondOrderFunction, TemplateFn } from '../../types/functionTypes'
 
 // @param cnd(option1): callback function returns boolean and accepts params props, br (optional)
 // @param cnd(option2): string value of property name
 export const condition = (cnd: boolean | string | NestedBooleanFunction): TemplateFn =>
   (...args: CSSTemplateArgs): NestedCSSFunction =>
-    (props: BreakpointProps, br?: IndexKey): string => {
+    (props: BreakpointProps, br?: BreakpointIndex): string => {
       let cndBln = false
 
       if (typeof cnd === 'function') {

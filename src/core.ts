@@ -1,4 +1,4 @@
-import { IndexKey } from "./types/functionTypes"
+import { PropsObject, PropObjectSubset, WindingOptions, WindingConfig, WoundProps, UnwoundProps } from '../types/propTypes'
 
 type SizeValue = number | void
 type SizeWhole = string
@@ -45,16 +45,22 @@ export function parseAndCalc(vars: ValUnits, fn: (vals: SizeValue | SizeValue[])
 // returns the applicable index to use as a reference for the provided property and index
 // returns the lesser of provided index and last index in the prop array
 // returns undefined if prop is undefined or not an array
-export const getPropIndex = (vals: any, i: IndexKey | void): void | IndexKey => {
-  const _i: IndexKey = i || 0
-  if (!vals || !Array.isArray(vals)) return undefined
+export const getPropIndex = (vals: any, i: number | void): void | number => {
+  const isValue = vals !== undefined && vals !== null;
+  const _i = i || 0
+  if (!isValue || !Array.isArray(vals)) return undefined
   return vals[_i] !== undefined ? _i : vals.length - 1
 }
 
 // returns property value based on provided property and index
-export const getIndexedPropValue = <Val>(vals: Val | Val[], i: IndexKey): Val | Val[] => {
-  const index: IndexKey | void = getPropIndex(vals, i)
-  return index !== undefined ? vals[index] : vals
+export const getIndexedPropValue = <Val>(vals: Val | Val[], i: number): Val | void => {
+  if (!Array.isArray(vals)) {
+    return vals
+  }
+  const index: number | void = getPropIndex(vals, i)
+  if (index != undefined) {
+    return vals[index]
+  }
 }
 
 // toggle boolean values in prop or prop array
@@ -93,25 +99,18 @@ export const inverseProp = (prop: boolean | boolean[]): boolean | boolean[] => {
 // reinfuses the default value instead.
 // @params defaults ex. 1 {left: ['8px', '0']}  || ex. 2 {left: '8px'}
 
-interface WindingOptions {
-  useNoValue?: boolean,
-  noValue?: string | number | boolean | null | undefined
-}
-interface WindingConfig {
-  defaultValues?: any,
-  options?: WindingOptions
-}
-
-export const windProps = (props: object[], config: WindingConfig): object => {
+export const windProps = (props: UnwoundProps, config: WindingConfig): WoundProps => {
   const { defaultValues, options }: WindingConfig = config || {}
   const { useNoValue = true, noValue = '' }: WindingOptions = options || {}
   if (!Array.isArray(props)) {
     return props
   }
-  function createSuperSet(propAry: object[]): object {
-    const superSetObj: object = {}
+
+
+  function createSuperSet(unwoundProps: UnwoundProps): WoundProps {
+    const superSetObj: WoundProps = {}
     // iterate through each key pair property object
-    propAry.forEach((obj) => {
+    unwoundProps.forEach((obj) => {
       // iterate through key pairs of current prop object
       Object.keys(obj).forEach((p) => {
         // add key to superSetObject
@@ -121,7 +120,7 @@ export const windProps = (props: object[], config: WindingConfig): object => {
     return superSetObj
   }
 
-  const wound: object = createSuperSet(props)
+  const wound: WoundProps = createSuperSet(props)
   const resultLength: number = props.length
   for (let i = 0; i < resultLength; i += 1) {
     Object.keys(wound).forEach((key) => {
@@ -153,17 +152,17 @@ export const windProps = (props: object[], config: WindingConfig): object => {
 // @option useNoValue: true || false (default)
 // useNoValue overwrites carryforward in the event of no default value
 // @option noValue: any value || undefined (default)
-export const unwindProps = (props: object, config: WindingConfig): object[] => {
+export const unwindProps = (props: PropsObject, config: WindingConfig): UnwoundProps => {
   const { defaultValues, options }: WindingConfig = config || {}
   const { noValue, useNoValue = false }: WindingOptions = options || {}
-  // first iteration return value
-  function getCurrValue(k: IndexKey, i: number): any {
-    const values = props[k]
-    // handle undefined properties
-    if (!values) {
-      return
+
+  function getCurrValue(k: string, i: number): PropObjectSubset | void {
+    const values: PropsObject = props[k]
+    if (values === undefined) {
+      return;
     }
-    // return static values on first iteration
+
+    // return static values on first index
     if (!Array.isArray(values)) {
       if (i !== 0) {
         return
@@ -173,14 +172,14 @@ export const unwindProps = (props: object, config: WindingConfig): object[] => {
     }
     const pAryLength = values.length
     if (i >= pAryLength) {
-      // no value at this iteration
+      // no value at this index
       return
     }
     // return curr value
     return { [k]: values[i] }
   }
 
-  const unwound: object[] = []
+  const unwound: UnwoundProps = []
   const keys = Object.keys(props)
   const resultLength = Math.max(...keys.map((k) => {
     const values = props[k]
@@ -188,20 +187,20 @@ export const unwindProps = (props: object, config: WindingConfig): object[] => {
   }))
 
   for (let i = 0; i < resultLength; i += 1) {
-    const propObj: object = keys.reduce((obj, p) => {
+    const propObj: PropsObject = keys.reduce((obj, k) => {
       // use current value if exist in prop set
-      const currVal = getCurrValue(p, i)
+      const currVal = getCurrValue(k, i)
       if (currVal !== undefined) {
-        return { ...obj, ...getCurrValue(p, i) }
+        return { ...obj, ...getCurrValue(k, i) }
       } else {
-        const defaultValue = defaultValues && defaultValues[p] !== undefined ? getIndexedPropValue(defaultValues[p], i) : undefined
+        const defaultValue = defaultValues && defaultValues[k] !== undefined ? getIndexedPropValue(defaultValues[k], i) : undefined
         if (defaultValue) {
-          return { ...obj, [p]: defaultValue }
+          return { ...obj, [k]: defaultValue }
         } else if (useNoValue) {
-          return { ...obj, [p]: noValue }
+          return { ...obj, [k]: noValue }
         } else {
           // get carry forward value
-          return { ...obj, [p]: getIndexedPropValue(props[p], i) }
+          return { ...obj, [k]: getIndexedPropValue(props[k], i) }
         }
       }
     }, {})

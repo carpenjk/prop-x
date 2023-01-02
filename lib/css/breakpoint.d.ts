@@ -1,3 +1,3 @@
-import { BreakpointIndex } from '../../types/propTypes';
-import { TemplateFn } from '../../types/functionTypes';
+import type { BreakpointIndex } from '../../types/propTypes';
+import type { TemplateFn } from '../../types/functionTypes';
 export declare const breakpoint: (br: BreakpointIndex | BreakpointIndex[]) => TemplateFn;

@@ -1,4 +1,4 @@
-import { PropsObject, WindingConfig, WoundProps, UnwoundProps } from '../types/propTypes';
+import type { PropsObject, WindingConfig, WoundProps, UnwoundProps } from '../types/propTypes';
 type SizeValue = number | void;
 type SizeWhole = string;
 type SizeUnit = string | void;

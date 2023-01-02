@@ -1,5 +1,5 @@
 import { WindowSize } from '../useWindowSize';
-import { Breakpoints, BreakpointsParam, BreakpointValue, BreakpointIndex } from '../../types/propTypes';
+import type { Breakpoints, BreakpointsParam, BreakpointValue, BreakpointIndex } from '../../types/propTypes';
 interface BreakpointsObj {
     br: Breakpoints;
     breakpoints: BreakpointsParam;

@@ -11,10 +11,9 @@ function useWindowSize(): WindowSize {
     return {
       width: isClient ? window.innerWidth : undefined,
       height: isClient ? window.innerHeight : undefined
-      // forceUpdate: getSize
     }
   }
-  const [windowSize, setWindowSize] = useState(getSize)
+  const [windowSize, setWindowSize] = useState<WindowSize>(getSize)
   useEffect(() => {
     if (!isClient) {
       return undefined

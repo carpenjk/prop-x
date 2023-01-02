@@ -17,7 +17,7 @@ interface BreakpointsObj {
 
 export const useBreakpoints = (brValues: BreakpointsParam): BreakpointsObj => {
   const windowSize = useWindowSize()
-  const [breakpoints, setBreakpoints] = useState({
+  const [breakpoints, setBreakpoints] = useState<BreakpointsObj>({
     br: getBreakpointPixels(brValues),
     breakpoints: brValues,
     upper: getUpper(brValues, windowSize.width ?? 0),

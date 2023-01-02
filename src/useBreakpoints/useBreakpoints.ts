@@ -1,7 +1,7 @@
 import useWindowSize, { WindowSize } from '../useWindowSize'
 import { useEffect, useState } from 'react'
 import { getBreakpointPixels, getIndexOfLower, getLower, getRatio, getUpper, toArray } from '../breakpoints'
-import { Breakpoints, BreakpointsParam, BreakpointValue, BreakpointIndex } from '../../types/propTypes'
+import type { Breakpoints, BreakpointsParam, BreakpointValue, BreakpointIndex } from '../../types/propTypes'
 
 
 interface BreakpointsObj {

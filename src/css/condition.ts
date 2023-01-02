@@ -1,7 +1,7 @@
 import { _getVal } from '../internal'
-import { BreakpointProps, BreakpointIndex } from '../../types/propTypes'
+import type { BreakpointProps, BreakpointIndex } from '../../types/propTypes'
+import type { CSSTemplateArgs, NestedBooleanFunction, NestedCSSFunction, TemplateFn } from '../../types/functionTypes'
 import { getProp } from './getProp'
-import { CSSTemplateArgs, NestedBooleanFunction, NestedCSSFunction, SecondOrderFunction, TemplateFn } from '../../types/functionTypes'
 
 // @param cnd(option1): callback function returns boolean and accepts params props, br (optional)
 // @param cnd(option2): string value of property name

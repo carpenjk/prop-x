@@ -1,4 +1,4 @@
-import { BreakpointIndex, BreakpointsParam, Breakpoints, BreakpointValue } from "../types/propTypes"
+import type { BreakpointIndex, BreakpointsParam, Breakpoints, BreakpointValue } from "../types/propTypes"
 
 
 export const getPxValue = (value: string | number): BreakpointValue | null => {

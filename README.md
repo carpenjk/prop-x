@@ -573,6 +573,63 @@ const Container = (){
 
 ```
 
+#### Providing Breakpoints
+
+Breakpoints used by styled-components are passed inside the theme property given to the ThemeContext provider and subsequently passed as a property of the component.
+Their are 3 supported formats for providing breakpoints:
+
+Breakpoints are supported for 3 formats:
+
+```js
+  import { ThemeProvider } from 'styled-components';
+
+  // Object literal with numerical pixel values
+  const theme = {
+    breakpoints: {
+      0: 0,
+      1: 880,
+      2: 1050,
+      3: 1200,
+      4: 1400,
+    }
+  }
+
+// Object literal with strings !!including pixel units
+// !!note keys may not be castable to a number or all keys must be castable in order to ensure size rankings
+  const theme = {
+    breakpoints: {
+      zero: "0px",
+      sm: "880px",
+      md: "1050px",
+      lg: "1200px",
+      xl: "1400px",
+    }
+  }
+
+  
+// Array with numerical pixel values
+const theme = {
+  breakpoints: []
+    0,
+    880,
+    1050,
+    1200,
+    1400,
+  ]
+}
+
+// Array with numerical pixel !!including pixel units
+  const theme = {
+    breakpoints: [
+      "0px",
+      "880px",
+      "1050px",
+      "1200px",
+      "1400px",
+    ]
+  }
+```
+
 #### Setting Multiple Breakpoints Simultaneously
 Multiple breakpoints can be set simultaneously if they share the same dynamic css properties. This reduces the amount of getProp and breakpoint code.
 

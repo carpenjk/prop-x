@@ -11,7 +11,11 @@ export type BreakpointValue = number
 export type BreakpointsParam = { [key: BreakpointIndex]: Breakpoint } | Array<string | number>
 export type Breakpoints = { [key: BreakpointIndex]: BreakpointValue } | BreakpointValue[]
 
-interface BreakpointTheme { breakpoints: BreakpointsParam }
+interface BreakpointTheme {
+  theme: {
+    breakpoints: BreakpointsParam
+  }
+}
 
 export type BreakpointProps = BreakpointTheme & {
   [key: string]: string | string[]

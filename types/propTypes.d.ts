@@ -18,7 +18,7 @@ interface BreakpointTheme {
 }
 
 export type BreakpointProps = BreakpointTheme & {
-  [key: string]: string | string[]
+  [key: string]: any
 }
 
 // export interface BreakpointProps {

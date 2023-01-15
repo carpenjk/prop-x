@@ -33,7 +33,7 @@ export const parseSizeUnits = (valUnits: ValUnits): SizeUnitsObj | SizeUnitsObj[
 //        _height && rSpan ? _height * rSpan : undefined
 // ),
 
-export function parseAndCalc(vars: ValUnits, fn: (vals: SizeValue | SizeValue[]) => any): string {
+export function parseAndCalc(vars: ValUnits, fn: (vals: SizeValue[]) => number): string {
   const parsed: SizeUnitsObj | SizeUnitsObj[] = parseSizeUnits(vars);
   const parsedArray: SizeUnitsObj[] = Array.isArray(parsed) ? parsed : [parsed]
   const varValues: SizeValue[] = parsedArray.map((v) => v && v.value ? v.value : undefined)
@@ -99,7 +99,7 @@ export const inverseProp = (prop: boolean | boolean[]): boolean | boolean[] => {
 // reinfuses the default value instead.
 // @params defaults ex. 1 {left: ['8px', '0']}  || ex. 2 {left: '8px'}
 
-export const windProps = (props: UnwoundProps, config: WindingConfig): WoundProps => {
+export const windProps = (props: UnwoundProps, config?: WindingConfig): WoundProps => {
   const { defaultValues, options }: WindingConfig = config || {}
   const { useNoValue = true, noValue = '' }: WindingOptions = options || {}
   if (!Array.isArray(props)) {
@@ -152,7 +152,7 @@ export const windProps = (props: UnwoundProps, config: WindingConfig): WoundProp
 // @option useNoValue: true || false (default)
 // useNoValue overwrites carryforward in the event of no default value
 // @option noValue: any value || undefined (default)
-export const unwindProps = (props: PropsObject, config: WindingConfig): UnwoundProps => {
+export const unwindProps = (props: PropsObject, config?: WindingConfig): UnwoundProps => {
   const { defaultValues, options }: WindingConfig = config || {}
   const { noValue, useNoValue = false }: WindingOptions = options || {}
 

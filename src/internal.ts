@@ -1,4 +1,4 @@
-import type { BreakpointIndex, BreakpointProps } from "../types/propTypes"
+import type { BreakpointIndex, BreakpointProps } from "@carpenjk/prop-x-types"
 
 export function deriveIndex(br: BreakpointIndex | undefined): number {
   return br === undefined ? 0 : Number(br)

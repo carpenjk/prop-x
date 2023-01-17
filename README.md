@@ -23,8 +23,7 @@ prop-x is a library to facilitate passing multiple values for each react propert
 | [getProp](#getProp)             	| @carpenjk/prop-x/css            	| retrieves a prop value for appropriate breakpoint in css in js solutions 	|
 | [breakpoint](#breakpoint)          	| @carpenjk/prop-x/css            	| creates media query and tells getProp which breakpoint to use            	|
 | [condition](#condition)           	| @carpenjk/prop-x/css            	| conditional css for css in js solutions                                  	|
-| [useBreakpoints](#useBreakpoints)      	| @carpenjk/prop-x/useBreakpoints 	| hook provides breakpoint and window size state                           	|
-| [useWindowSize](#useWindowSize)       	| @carpenjk/prop-x/useWindowSize  	| hook provides window size state                                          	|
+| [useBreakpoints](#useBreakpoints)      	| @carpenjk/useBreakpoints 	| hook provides breakpoint and window size state                           	|
 
 
 ## License
@@ -768,24 +767,34 @@ const Container = (){
 
 ## hooks
 ### useBreakpoints
-```js
-  const br = useBreakpoints(theme);
+
+UseBreakpoints is a separate package so that prop-x doesn't need to have React as a peer dependency
+
+#### Installation
+
+```
+  npm i @carpenjk/use-breakpoints
 ```
 
+#### import
+
+```js
+  import { useBreakpoints } from '@carpenjk/use-breakpoints
+```
+
+#### Usage
 The useBreakpoints hooks provides access to the breakpoints and related functions and calculated values. It is useful for client side only code that needs to evaluate properties indexed by breakpoints.
 
 ```js
-const theme = {
-    breakpoints: {
-      0: 0,
-      1: 880,
-      2: 1050,
-      3: 1200,
-      4: 1400,
-    }
+const breakpoints: {
+    0: 0,
+    1: 880,
+    2: 1050,
+    3: 1200,
+    4: 1400,
   }
 
-const br = useBreakpoints(theme);
+const br = useBreakpoints(breakpoints);
 
 // assume current window.innerWidth = 1000
 //br = 
@@ -798,21 +807,8 @@ const br = useBreakpoints(theme);
 //   current: 1000,  // current window width
 // }
 
-const indexedPropVal = getIndexedPropValues([100, 200, 300], br.lower);
+const indexedPropVal = getIndexedPropValue([100, 200, 300], br.indexOfLower);
 // indexedPropVal = 200;
 
 ```
-
-### useWindowSize
-```js
-const windowSize = useWindowSize();
-
-// assume window.innerWidth = 1480
-// windowSize = 
-{
-  width: 1480,
-  height: 1027,
-}
-```
-The useWindowSize hook provides provides an widow size object containing window.innerWidth and window.innerHeight values
 

@@ -1,4 +1,4 @@
-import type { PropsObject, PropObjectSubset, WindingOptions, WindingConfig, WoundProps, UnwoundProps } from '../types/propTypes'
+import type { PropsObject, PropObjectSubset, WindingOptions, WindingConfig, WoundProps, UnwoundProps } from '@carpenjk/prop-x-types'
 
 type SizeValue = number | void
 type SizeWhole = string

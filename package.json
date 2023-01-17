@@ -5,6 +5,7 @@
   "main": "lib/core.js",
   "scripts": {
     "build": "rimraf ./lib && tsc",
+    "prepublish": "npm run build",
     "semantic-release": "semantic-release --branches main",
     "commit": "git-cz"
   },
@@ -31,8 +32,7 @@
     "README.md",
     "useBreakpoints.js",
     "useWindowSize.js",
-    "css.js",
-    "types"
+    "css.js"
   ],
   "author": "Jeremy Carpenter",
   "license": "Apache-2.0",
@@ -45,6 +45,7 @@
     "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.9",
     "@babel/preset-typescript": "^7.18.6",
+    "@carpenjk/prop-x-types": "^1.0.0",
     "@types/node": "^18.11.17",
     "@types/react": "^18.0.26",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
@@ -70,5 +71,8 @@
   "peerDependencies": {
     "react": "17 - 18",
     "react-dom": "17 - 18"
+  },
+  "dependencies": {
+    "@carpenjk/use-breakpoints": "github:carpenjk/useBreakpoints#typescript"
   }
 }

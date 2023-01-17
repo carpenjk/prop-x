@@ -1,6 +1,5 @@
 import { _getUnitValue, _getVal } from '../internal'
-import type { Breakpoint, BreakpointIndex, BreakpointProps } from '../../types/propTypes'
-import type { CSSTemplateArgs, SecondOrderFunction, TemplateFn } from '../../types/functionTypes'
+import type { Breakpoint, BreakpointIndex, BreakpointProps, CSSTemplateArgs, SecondOrderFunction, TemplateFn } from '@carpenjk/prop-x-types'
 
 export const breakpoint = (br: BreakpointIndex | BreakpointIndex[]): TemplateFn =>
   (...args: CSSTemplateArgs): SecondOrderFunction =>

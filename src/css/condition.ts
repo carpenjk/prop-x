@@ -1,6 +1,5 @@
 import { _getVal } from '../internal'
-import type { BreakpointProps, BreakpointIndex } from '../../types/propTypes'
-import type { CSSTemplateArgs, NestedBooleanFunction, NestedCSSFunction, TemplateFn } from '../../types/functionTypes'
+import type { BreakpointProps, BreakpointIndex, CSSTemplateArgs, NestedBooleanFunction, NestedCSSFunction, TemplateFn } from '@carpenjk/prop-x-types'
 import { getProp } from './getProp'
 
 // @param cnd(option1): callback function returns boolean and accepts params props, br (optional)
